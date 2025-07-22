@@ -6,9 +6,12 @@ async function worker() {
   await client.connect();
   console.log("worker started");
 
-  while (true) {
+  while(1) {
     try {
-      const submission = await client.brPop("submission", 0);
+      const response = await client.brPop("problems", 0);
+      console.log(response);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log("processed user submission");
     } catch (error) {
       console.error(error);
     }
